@@ -53,13 +53,13 @@ kind: Ingress
 metadata:
   name: app1  
   annotations: 
-    kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/listen-ports:  '[{"HTTPS": 443}]' 
     alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:838180513114:certificate/0d4ad40d-9703-4ad5-aeee-1ba0b36a379e
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip 
 
 spec:
+  ingressClassName: alb
   rules:
   - host: "app1.hellodevsecops.space"
     http:
