@@ -9,7 +9,7 @@ Set the following environment variables for your AWS environment before running 
 ```bash
 export REGION_CODE="us-east-1"
 export CLUSTER_NAME="roboshop-dev"
-export ACC_ID="<YOUR_AWS_ACCOUNT_ID>" # Put your AWS account ID here
+export ACC_ID="838180513114"
 ```
 
 ## Setup Steps
