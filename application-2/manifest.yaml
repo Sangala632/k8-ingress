@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  #replica set labels
+  labels: 
+    purpose: ingress-demo
+    project: roboshop
+    app: app2
+spec:
+# These are the labels replica set use to create pod replicas, this should match pod labels
+  replicas: 2
+  selector:
+    matchLabels:
+      purpose: ingress-demo
+      project: roboshop
+      app: app2
+  # This is pod definition
+  template:
+    metadata:
+      labels:
+        purpose: ingress-demo
+        project: roboshop
+        app: app2
+    spec:
+      containers:
+      - name: app2  
+        image: sangala2025/app-2:v1
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: app2-svc
+  labels:
+    purpose: ingress-demo
+    project: roboshop
+    app: app2
+spec:
+  selector:
+    purpose: ingress-demo
+    project: roboshop
+    app: app2
+  ports:
+    - protocol: TCP
+      port: 80 #srevice port
+      targetPort: 80 # container port
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+  annotations: 
+    alb.ingress.kubernetes.io/listen-ports:  '[{"HTTPS": 443}]' 
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:838180513114:certificate/0d4ad40d-9703-4ad5-aeee-1ba0b36a379e
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip 
+    
+spec:
+  rules:
+  - host: "app2.hellodevsecops.space"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: app2-svc
+            port:
+              number: 80

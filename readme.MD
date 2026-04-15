@@ -7,9 +7,9 @@ This guide walks you through the prerequisites and IAM setup required before ins
 Set the following environment variables for your AWS environment before running the setup commands:
 
 ```bash
-export REGION_CODE="us-east-1"
-export CLUSTER_NAME="roboshop-dev"
-export ACC_ID="838180513114"
+ REGION_CODE=us-east-1
+ CLUSTER_NAME=Roboshop-Cluster
+ ACC_ID=838180513114
 ```
 
 ## Setup Steps
