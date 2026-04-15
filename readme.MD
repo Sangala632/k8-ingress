@@ -53,3 +53,19 @@ eksctl create iamserviceaccount \
     --region $REGION_CODE \
     --approve
 ```
+### 5. Install Load Balancer Controller
+Add the Amazon EKS Helm chart repository and install the AWS Load Balancer Controller using Helm:
+
+```bash
+# Add and update the EKS chart repository
+helm repo add eks https://aws.github.io/eks-charts
+helm repo update eks
+
+# Install the AWS Load Balancer Controller
+helm install aws-load-balancer-controller eks/aws-load-balancer-controller \
+    -n kube-system \
+    --set clusterName=$CLUSTER_NAME \
+    --set serviceAccount.create=false \
+    --set serviceAccount.name=aws-load-balancer-controller
+```
+
