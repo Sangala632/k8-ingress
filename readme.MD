@@ -5,7 +5,7 @@
 
 REGION_CODE=us-east-1
 CLUSTER_NAME= roboshop-dev
-ACC_ID=
+ACC_ID=838180513114
 ```
 
 eksctl utils associate-iam-oidc-provider \
